@@ -19,9 +19,19 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
     depends_on:
     - selenium
+    - redis  # <-- NOVO: Dependência do Redis
+
+    # NOVO: Defina a URL do Redis. O nome do host é 'redis'.
+    environment:
+      REDIS_URL: REDIS_URL
+
 
   selenium:
     image: selenium/standalone-chromium
     restart: unless-stopped
 
-  
+  redis:
+    image: redis:7.0-alpine
+    restart: unless-stopped
+    expose:
+      - 6379
