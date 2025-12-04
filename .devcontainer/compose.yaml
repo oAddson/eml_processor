@@ -1,6 +1,18 @@
 name: "eml_processor"
 
 services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: eml_processor_development
+    ports:
+      - "5432:5432"
+
   rails-app:
     build:
       context: ..
@@ -19,11 +31,8 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
     depends_on:
     - selenium
-    - redis  # <-- NOVO: Dependência do Redis
-
-    # NOVO: Defina a URL do Redis. O nome do host é 'redis'.
-    environment:
-      REDIS_URL: REDIS_URL
+    - redis 
+    - db
 
 
   selenium:
@@ -35,3 +44,6 @@ services:
     restart: unless-stopped
     expose:
       - 6379
+
+volumes:
+  postgres_data:
