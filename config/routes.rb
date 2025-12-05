@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root "ingestion#index"
   resources :ingestion, only: [ :create ]
-
+  resources :customers, only: [ :index ]
   # Defines the root path route ("/")
   # root "posts#index"
   mount Sidekiq::Web => "/sidekiq"

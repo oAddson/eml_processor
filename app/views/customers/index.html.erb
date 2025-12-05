@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Clientes Processados (<%= @customers.count %>)</h1>
+
+  <p class="text-muted">
+    Lista de todos os registros de interesse criados após extração bem-sucedida
+    dos e-mails.
+  </p>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Nome Completo</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+        <th>Produto</th>
+        <th>Assunto E-mail</th>
+        <th>Criado em</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.full_name %></td>
+          <td><%= customer.email %></td>
+          <td><%= customer.phone %></td>
+          <td><%= customer.product_code %></td>
+          <td><%= customer.email_subject %></td>
+          <td><%= l customer.created_at, format: :short %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @customers.empty? %>
+    <div class="alert alert-info text-center">
+      Nenhum cliente processado com sucesso ainda.
+    </div>
+  <% end %>
+</div>
