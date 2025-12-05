@@ -37,6 +37,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
+    Rails.root.join('spec/emails'),
     Rails.root.join('spec/fixtures')
   ]
 
@@ -74,11 +75,7 @@ RSpec.configure do |config|
 end
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
-    with.test_framework :rspec,
-      helper_specs: false,
-      routing_specs: false,
-      controller_specs: true,
-      request_specs: true
+    with.test_framework :rspec
     with.library :rails
   end
 end

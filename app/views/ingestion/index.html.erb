@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="mb-4 text-center">
+        📤 Ingestão de E-mails para Processamento
+      </h1>
+
+      <p class="text-center text-muted">
+        Faça o upload do arquivo .eml para iniciar o pipeline de extração de
+        dados de clientes.
+      </p>
+
+      <%# <%= render "shared/flash_messages" %>
+      %>
+      <div class="card shadow-sm mt-4">
+        <div class="card-body p-4">
+          <%= form_with url: ingestion_index_path, method: :post, local: true, html: { multipart: true } do |f| %>
+            <div class="mb-3">
+              <%= f.label :eml_file, "Selecione o arquivo .eml", class: "form-label fw-bold" %>
+              <%= f.file_field :eml_file, class: "form-control", accept: ".eml, message/rfc822", required: true %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.submit "Processar Arquivo", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
