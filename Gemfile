@@ -71,6 +71,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
+  gem "simplecov", require: false
+  gem "rails-controller-testing"
 end
 
-gem "byebug", "~> 12.0", groups: [:development, :test]
+gem "byebug", "~> 12.0", groups: [ :development, :test ]

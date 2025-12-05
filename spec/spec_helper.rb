@@ -92,3 +92,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  # Ignora arquivos de configuração e inicialização que não precisam de teste
+  add_filter 'config/'
+  add_filter 'db/'
+  add_filter 'vendor/'
+
+  # Define o limite mínimo de cobertura para falhar o build/teste
+  # (Útil para CI/CD)
+  minimum_coverage 95 # Você pode ajustar essa porcentagem
+end
