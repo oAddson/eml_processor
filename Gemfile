@@ -72,3 +72,5 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
+
+gem "byebug", "~> 12.0", groups: [:development, :test]
