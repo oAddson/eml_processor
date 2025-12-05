@@ -20,4 +20,12 @@ class EmailProcessingRecord < ApplicationRecord
   validates :customer, absence: true, unless: :success?
 
   validates :error_details, presence: true, if: :failure?
+
+  after_create_commit :schedule_extraction_job
+
+  private
+
+  def schedule_extraction_job
+    EmailExtractionJob.perform_later(email_processing_record_id: id)
+  end
 end

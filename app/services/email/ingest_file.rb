@@ -14,8 +14,6 @@ module Email
 
         log_record = create_pending_log!(archived_email)
 
-        EmailExtractionJob.perform_later(email_processing_record_id: log_record.id)
-
         { success: true, data: log_record }
       end
     rescue ActiveRecord::RecordInvalid => e

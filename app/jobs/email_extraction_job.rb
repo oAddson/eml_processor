@@ -5,7 +5,7 @@ class EmailExtractionJob < ApplicationJob
     log_record = EmailProcessingRecord.find_by(id: email_processing_record_id)
     return unless log_record
 
-    # result = Email::ExtractData.call(log_record: log_record)
+    result = Email::ExtractData.call(log_record: log_record)
 
     if result[:success]
       Rails.logger.info "Job ##{log_record.id}: Extração concluída com sucesso."
