@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Histórico de Processamento (Logs)</h1>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID Log</th>
+        <th>Arquivo Processado</th>
+        <th>Status</th>
+        <th>Cliente Afetado</th>
+        <th>Processado em</th>
+        <th>Detalhes</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @logs.each do |log| %>
+        <tr class="<%= log.success? ? 'table-success' : (log.failure? ? 'table-danger' : 'table-warning') %>">
+          <td><%= log.id %></td>
+          <td><%= log.processed_file_name %></td>
+
+          <td>
+            <span class="badge bg-<%= log.success? ? 'success' : (log.failure? ? 'danger' : 'warning') %>">
+              <%= log.processing_status.upcase %>
+            </span>
+          </td>
+
+          <td><%= log.customer&.full_name || "N/A" %></td>
+          <td><%= l log.created_at, format: :short %></td>
+
+          <td>
+            <%= link_to 'Ver', email_processing_record_path(log), class: 'btn btn-sm btn-info' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @logs.empty? %>
+    <div class="alert alert-info text-center">
+      Nenhum registro de processamento encontrado.
+    </div>
+  <% end %>
+
+  <%# = paginate @logs %>
+</div>

@@ -21,6 +21,7 @@ FactoryBot.define do
 
     trait :without_file do
       eml_file { nil }
+      after(:build) { |record| record.eml_file.purge if record.eml_file.attached? }
     end
   end
 end

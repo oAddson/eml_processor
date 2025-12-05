@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   root "ingestion#index"
   resources :ingestion, only: [ :create ]
   resources :customers, only: [ :index ]
+  resources :email_processing_records, only: [ :index, :show ] do
+    member do
+      post :reprocess
+      get :download_file
+    end
+  end
   # Defines the root path route ("/")
   # root "posts#index"
   mount Sidekiq::Web => "/sidekiq"

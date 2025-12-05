@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Detalhes do Log #<%= @log.id %></h1>
+
+  <div class="card mb-4">
+    <div class="card-header bg-light">
+      Informações Básicas
+    </div>
+
+    <div class="card-body">
+      <p>
+        <strong>Status:</strong>
+
+        <span class="badge bg-<%= @log.success? ? 'success' : (@log.failure? ? 'danger' : 'warning') %>">
+          <%= @log.processing_status.upcase %>
+        </span>
+      </p>
+
+      <p><strong>Arquivo:</strong> <%= @log.processed_file_name %></p>
+
+      <p>
+        <strong>Processado em:</strong>
+        <%= l @log.created_at, format: :long %>
+      </p>
+
+      <p><strong>Arquivo Arquivado ID:</strong><%= @log.archived_email_id %></p>
+    </div>
+  </div>
+
+  <% if @log.success? %>
+    <div class="card mb-4 border-success">
+      <div class="card-header bg-success text-white">
+        Dados Extraídos (Sucesso)
+      </div>
+
+      <div class="card-body">
+        <pre><%= JSON.pretty_generate(@log.extracted_data_json) %></pre>
+
+        <p>
+          <strong>Cliente Final:</strong>
+          <%= link_to @log.customer.full_name, customer_path(@log.customer) %>
+        </p>
+      </div>
+    </div>
+  <% elsif @log.failure? %>
+    <div class="card mb-4 border-danger">
+      <div class="card-header bg-danger text-white">
+        Detalhes da Falha
+      </div>
+
+      <div class="card-body">
+        <p class="text-danger fw-bold">
+          O processamento falhou devido ao seguinte erro:
+        </p>
+
+        <p><%= @log.error_details %></p>
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-warning">
+      Aguardando processamento em segundo plano (Status PENDING).
+    </div>
+  <% end %>
+
+  <div class="d-flex justify-content-between mb-3">
+    <%= link_to 'Voltar para Logs', email_processing_records_path, class: 'btn btn-secondary' %>
+
+    <%= link_to 'Download Arquivo Original', download_file_email_processing_record_path(@log), 
+                class: 'btn btn-info', 
+                data: { turbo: false } %>
+
+    <% unless @log.pending? %>
+      <%= button_to 'Reprocessar E-mail', reprocess_email_processing_record_path(@log), 
+                  method: :post, 
+                  form: { data: { turbo_confirm: "Tem certeza que deseja iniciar o reprocessamento deste e-mail?" } },
+                  class: 'btn btn-warning' %>
+    <% end %>
+  </div>
+</div>
