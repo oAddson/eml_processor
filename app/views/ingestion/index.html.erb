@@ -10,8 +10,6 @@
         dados de clientes.
       </p>
 
-      <%# <%= render "shared/flash_messages" %>
-      %>
       <div class="card shadow-sm mt-4">
         <div class="card-body p-4">
           <%= form_with url: ingestion_index_path, method: :post, local: true, html: { multipart: true } do |f| %>
