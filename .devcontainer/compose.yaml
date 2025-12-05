@@ -9,9 +9,8 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: eml_processor_development
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   rails-app:
     build:
@@ -34,6 +33,15 @@ services:
     - redis 
     - db
 
+  sidekiq:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../../eml_processor:/workspaces/eml_processor:cached
+    depends_on:
+      - db
+      - redis
 
   selenium:
     image: selenium/standalone-chromium

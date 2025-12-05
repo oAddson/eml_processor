@@ -74,7 +74,11 @@ RSpec.configure do |config|
 end
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
-    with.test_framework :rspec
+    with.test_framework :rspec,
+      helper_specs: false,
+      routing_specs: false,
+      controller_specs: true,
+      request_specs: true
     with.library :rails
   end
 end
