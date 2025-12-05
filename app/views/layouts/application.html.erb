@@ -39,5 +39,9 @@
     ></script>
   </head>
 
-  <body><%= render 'shared/flash_messages' %><%= yield %></body>
+  <body>
+    <%= render 'shared/flash_messages' %>
+    <%= render 'shared/navbar' %>
+    <%= yield %>
+  </body>
 </html>
