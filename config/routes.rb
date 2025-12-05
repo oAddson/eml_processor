@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root "ingestion#index"
   resources :ingestion, only: [ :create ]
-  resources :customers, only: [ :index ]
+  resources :customers, only: [ :index, :show ]
   resources :email_processing_records, only: [ :index, :show ] do
     member do
       post :reprocess

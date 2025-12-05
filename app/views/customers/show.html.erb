@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Detalhes do Cliente #<%= @customer.id %></h1>
+
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      Informações de Contato e Interesse
+    </div>
+
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Nome Completo:</strong>
+          <%= @customer.full_name %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>E-mail:</strong>
+          <%= @customer.email %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Telefone:</strong>
+          <%= @customer.phone %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Código do Produto:</strong>
+          <%= @customer.product_code %>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Data de Registro:</strong>
+          <%= l @customer.created_at, format: :long %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <% if @related_log %>
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        Origem do Processamento
+      </div>
+
+      <div class="card-body">
+        <p>Este registro de cliente foi criado pelo log de processamento:</p>
+
+        <p>
+          <strong>Log ID:</strong>
+          <%= @related_log.id %>
+          <br>
+          <strong>Arquivo Original:</strong>
+          <%= @related_log.processed_file_name %>
+          <br>
+          <%= link_to 'Ver Log de Processamento Completo', email_processing_record_path(@related_log), class: 'btn btn-sm btn-outline-info mt-2' %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to 'Voltar para Lista de Clientes', customers_path, class: 'btn btn-secondary' %>
+</div>
