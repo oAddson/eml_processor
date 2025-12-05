@@ -1,4 +1,3 @@
-# spec/factories/archived_emails.rb
 
 FactoryBot.define do
   factory :archived_email do

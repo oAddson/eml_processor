@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_04_200940) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_04_210532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,6 +60,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_200940) do
     t.index ["email"], name: "index_customers_on_email", unique: true
   end
 
+  create_table "email_processing_records", force: :cascade do |t|
+    t.bigint "archived_email_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "customer_id"
+    t.text "error_details"
+    t.jsonb "extracted_data_json"
+    t.string "processed_file_name"
+    t.integer "processing_status", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["archived_email_id"], name: "index_email_processing_records_on_archived_email_id"
+    t.index ["customer_id"], name: "index_email_processing_records_on_customer_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "email_processing_records", "archived_emails"
+  add_foreign_key "email_processing_records", "customers"
 end
