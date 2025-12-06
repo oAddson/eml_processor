@@ -1,3 +1,5 @@
+Video apresentação - https://youtu.be/TH23yrfM5YQ
+
 🚀 EML Processor: Processamento de E-mails (Teste C2S)
 Este projeto é a solução para o Teste Técnico de Desenvolvedor Ruby on Rails (Pleno), focado no desenvolvimento de uma aplicação que processa arquivos .eml (e-mails), extrai dados estruturados e os armazena no banco de dados.
 
