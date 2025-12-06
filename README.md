@@ -1,4 +1,4 @@
-Video apresentação - https://youtu.be/TH23yrfM5YQ
+Video apresentação - https://youtu.be/PdMPyBjrdkg
 
 # 🚀 EML Processor: Processamento de E-mails (Teste C2S)
 
@@ -50,7 +50,7 @@ Clique em **Reopen in Container**.
 Se necessário, force a reconstrução:
 
 ```
-Dev Containers: Reopen and Rebuild
+Dev Containers: Rebuild Container
 ```
 
 ---
