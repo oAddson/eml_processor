@@ -1,0 +1,4 @@
+LogCleanupJob:
+  cron: '47 19 * * *' 
+  class: 'LogCleanupJob'
+  queue: 'low_priority'
